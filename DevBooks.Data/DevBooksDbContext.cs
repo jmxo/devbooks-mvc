@@ -14,25 +14,37 @@ namespace DevBooks.Data
         public DbSet<Book> Books { get; set; }
         public DbSet<User> Users { get; set; }
 
-        public static string ConnectionStringName
+        
+        public DevBooksDbContext() : base("Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=DevBooksDEV;Integrated Security=True;") { }
+
+
+        private void ApplyRules()
         {
-            get
+            foreach (var entry in ChangeTracker.Entries().Where(
+                e => e.Entity is IAuditInfo && (e.State == EntityState.Added) || (e.State == EntityState.Modified)))
             {
-                if (ConfigurationManager.AppSettings["ConnectionStringName"] != null)
+                IAuditInfo e = (IAuditInfo)entry.Entity;
+                if (entry.State == EntityState.Added)
                 {
-                    return ConfigurationManager.AppSettings["ConnectionStringName"].ToString();
+                    e.CreatedOn = DateTime.Now;
                 }
 
-                return "DefaultConnection";
+                e.ModifiedOn = DateTime.Now;
+
             }
         }
 
-        public DevBooksDbContext() : base(nameOrConnectionString: DevBooksDbContext.ConnectionStringName) { }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        public override int SaveChanges()
         {
-            
-            //base.OnModelCreating(modelBuilder);
+            ApplyRules();
+            return base.SaveChanges();
         }
+
+        // To customize the model builder configurations
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Configurations.Add(new HomeConfiguration());
+        //    base.OnModelCreating(modelBuilder);
+        //}
     }
 }
