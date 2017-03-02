@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container">
+    <div class="jumbotron">
+        <div>
+            @*<img src="~/img/coded-homes-logo-large.png" />*@
+            <h1>DevBooks</h1>
+        </div>
+        <p class="lead">Share your favorite Software Development books with everyone!</p>
+
+        <div class="online deferred">
+            <a class="btn btn-large" href="/books">View Saved Books</a>
+            <a class="btn btn-large" href="/books/new">Add a New Book</a>
+        </div>
+
+        <div class="offline deferred">
+            <a class="btn btn-large" href="/books/offline">Add a New Book</a>
+        </div>
+    </div>
+</div>
