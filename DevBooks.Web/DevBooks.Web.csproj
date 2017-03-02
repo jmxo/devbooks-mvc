@@ -183,6 +183,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703021951588_InitialCreate.cs" />
+    <Compile Include="Migrations\201703021951588_InitialCreate.Designer.cs">
+      <DependentUpon>201703021951588_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -273,6 +278,11 @@
       <Project>{4ba74b32-2d1f-4acf-aabb-0138f79fb6f7}</Project>
       <Name>DevBooks.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201703021951588_InitialCreate.resx">
+      <DependentUpon>201703021951588_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
