@@ -13,8 +13,9 @@ namespace DevBooks.Web
                 "~/Scripts/bootstrap.js",
                 "~/Scripts/knockput-{version}.js",
                 "~/Scripts/underscore.js",
-                "~/Scripts/respond.js"
-                      ));
+                "~/Scripts/respond.js",
+                "~/Scripts/app/booksDataService.js"
+                ));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
