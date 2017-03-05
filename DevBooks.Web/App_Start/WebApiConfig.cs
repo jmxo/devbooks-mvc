@@ -9,10 +9,17 @@ namespace DevBooks.Web
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
-
-            // Web API routes
             config.MapHttpAttributeRoutes();
+
+            config.Routes.MapHttpRoute(
+                name: "API",
+                routeTemplate: "api/books/{id}",
+                defaults: new
+                {
+                    controller = "BooksAPI",
+                    id = RouteParameter.Optional
+                }
+            );
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
