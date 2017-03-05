@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DevBooks.Data
 {
-    class BookRepository : GenericRepository<Book>
+    public class BookRepository : GenericRepository<Book>
     {
         public BookRepository(DbContext context) : base(context) {}
     }

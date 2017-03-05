@@ -67,7 +67,7 @@ namespace DevBooks.Data
             entry.State = EntityState.Detached;
         }
 
-        public IQueryable GetAll()
+        public IQueryable<T> GetAll()
         {
             return DbSet;
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DevBooks.Data
 {
-    class ApplicationUnit : IDisposable
+    public class ApplicationUnit : IDisposable
     {
         private DevBooksDbContext _context = new DevBooksDbContext();
 
@@ -17,11 +17,11 @@ namespace DevBooks.Data
         {
             get
             {
-                if (_books == null)
+                if (this._books == null)
                 {
-                    _books = new GenericRepository<Book>(_context);
+                    this._books = new BookRepository(this._context);
                 }
-                return _books;
+                return this._books;
             }
         }
 
