@@ -18,6 +18,8 @@ namespace DevBooks.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            CustomGlobalConfig.Customize(GlobalConfiguration.Configuration);
         }
     }
 }
