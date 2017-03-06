@@ -6,7 +6,7 @@
     <title>@ViewBag.Title - DevBooks</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @RenderSection("localStyles", required: false)
+    @RenderSection("styles", required: false)
 
 </head>
 <body>
@@ -21,11 +21,11 @@
                 @Html.ActionLink("DevBooks", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                @*<ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>*@
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Top Books", "Index", "Books")</li>
+                    <li>@Html.ActionLink("Add a Book", "Index", "Home")</li>
+                    @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
@@ -38,8 +38,7 @@
         </footer>
     </div>
     @RenderSection("breakout", required: false) @*the sticky message on the top of the page*@
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/site")
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -19,7 +19,7 @@ namespace DevBooks.Web.Controllers
             BooksListViewModel vm = new BooksListViewModel();
             var query = _unit.Books.GetAll().OrderBy(b => b.Title);
             vm.Books = query.ToList();
-            return View();
+            return View(vm);
         }
 
         protected override void Dispose(bool disposing)

@@ -209,7 +209,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\books\aspnet-core-ng2.jpg" />
+    <Content Include="img\books\eloquent-javascript.jpg" />
+    <Content Include="img\books\modern-web-development.jpg" />
     <Content Include="Scripts\app\booksDataService.js" />
+    <Content Include="Scripts\app\_mixins.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
