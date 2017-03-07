@@ -15,7 +15,7 @@ namespace DevBooks.Data
         public DbSet<User> Users { get; set; }
 
         
-        public DevBooksDbContext() : base("Data Source=(LocalDb)\\MSSQLLocalDB;Initial Catalog=DevBooksDEV;Integrated Security=True;") { }
+        public DevBooksDbContext() : base("name=DefaultConnection") { }
 
 
         private void ApplyRules()

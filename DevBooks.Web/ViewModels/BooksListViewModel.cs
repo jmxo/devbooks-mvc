@@ -8,7 +8,7 @@ using System.Web;
 
 namespace DevBooks.Web.ViewModels
 {
-    public class BooksListViewModel : ViewModelBase
+    public class BooksListViewModel /*: ViewModelBase*/ // Return after fixing RoleEvaluator
     {
         public IList<Book> Books { get; set; }
 

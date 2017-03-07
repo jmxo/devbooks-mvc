@@ -25,7 +25,7 @@
                 this.books = ko.observableArray(@Html.Raw(Model.BooksJSON));
 
 
-                @if (Model.CanDelete)
+               @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
 {
 <text>
                 this.currentBook = {};
@@ -81,7 +81,8 @@
 }
 
 <h1>Top Books</h1>
-@if (Model.CanDelete)
+
+@if (User.IsInRole("Admin") || User.IsInRole("Manager")) //CanDelete
 {
     <div id="error-container" class="none">
         <div class="alert alert-error">
@@ -104,12 +105,12 @@
             </div>
             <div class="col-md-9">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <h4 data-bind="text: title"></h4>
-                        <i class="text-muted">by </i>
+                        <span class="text-muted">by </span>
                         <span data-bind="text: author" class="text-muted"></span><br />
                         <!-- ko if: $data.publisher -->
-                        <span data-bind="text: publisher"></span><br /><br />
+                        <span data-bind="text: publisher" class="text-muted"></span><br /><br />
                         <!-- /ko -->
                         <h4 data-bind="text: priceFormatted"></h4>
                     </div>
@@ -120,15 +121,15 @@
                         <p data-bind="text: description"></p>
                     </div>
                 </div>
-                <div class="row">
-                    @if (Model.CanDelete)
-                    {
-                        <a href="#" class="btn btn-mini"
+                <div class="row" style="margin-left:0px">
+                   @if (User.IsInRole("Admin") || User.IsInRole("Manager")) //CanDelete
+                   {
+                        <a href="#" class="btn btn-sm btn-danger"
                            data-bind="click: $parent.requestDelConfirm">Delete</a>
                     }
-                    @if (Model.CanEdit)
+                    @if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("User")) //CanEdit
                     {
-                        <a class="btn btn-primary btn-mini"
+                        <a class="btn btn-primary btn-sm"
                            data-bind="attr: {href: '/books/edit/' + id}">Edit</a>
                     }
                 </div>
@@ -137,7 +138,7 @@
     </div>
 </script>
 
-@if (Model.CanDelete)
+@if (User.IsInRole("Admin") || User.IsInRole("Manager")) //CanDelete
 {
     <div id="del-confirm" class="modal hide fade" tabindex="-1" role="dialog"
          aria-labelledby="del-confirm-label" aria-hidden="true">

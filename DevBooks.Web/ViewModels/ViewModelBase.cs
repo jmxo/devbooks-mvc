@@ -1,4 +1,6 @@
 ﻿using DevBooks.Web.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,7 @@ namespace DevBooks.Web.ViewModels
     {
         private bool? _canEdit = null;
         private bool? _canDelete = null;
+
         private RoleEvaluator _evaluator = new RoleEvaluator();
 
         public bool CanEdit
