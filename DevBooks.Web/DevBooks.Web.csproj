@@ -213,6 +213,7 @@
     <Content Include="img\books\eloquent-javascript.jpg" />
     <Content Include="img\books\modern-web-development.jpg" />
     <Content Include="Scripts\app\booksDataService.js" />
+    <Content Include="Scripts\app\validationUtility.js" />
     <Content Include="Scripts\app\_mixins.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
