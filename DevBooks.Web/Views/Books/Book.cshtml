@@ -1,0 +1,256 @@
+﻿@model DevBooks.Web.ViewModels.BookViewModel
+
+@section styles {
+    <style>
+        #success-msg-container,
+        #fail-msg-container,
+        #delete-msg-container,
+        #img-fail-msg-container {
+            display: none;
+        }
+    </style>
+}
+
+
+
+
+
+
+<div class="row" style="margin-top:50px;">
+    <div class="col-md-5">
+        <div class="row">
+            <div class="col-md-10">
+                <div>
+                    <img data-bind="attr: { src: model.imageUrl }" class="fancy" />
+                </div>
+                <button id="upload-button" data-bind="click: showImageUpload" class="btn btn-sm">
+                    <i class="icon-upload"></i> Upload Image
+                </button>
+                <div id="upload-form-container"
+                     class="none alert alert-success push-down">
+                    <form id="upload-form" action="/books/uploadimage"
+                          method="POST" enctype="multipart/form-data">
+                        <button class="btn btn-sm pull-right" data-bind="click: hideImageUpload">
+                            x
+                        </button>
+                        <input id="image-upload" type="file" name="image" />
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div id="img-fail-msg-container"
+             class="alert alert-error alert-block push-down">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <h4>Error</h4>
+            <p>
+                Oops, something bad happened!
+                This is what the server has to say about it:
+            </p>
+            <p data-bind="text: errorMessage"></p>
+        </div>
+    </div>
+    <form id="book-data-form">
+        <div class="col-md-5 mobile-push-right">
+            <div class="row">
+                <div class="col-md-11  form-horizontal">
+
+                    <div class="form-group">
+                        <label for="title" class="col-sm-2 control-label">Title</label>
+                        <div class="col-sm-10">
+                            <input data-bind="value: model.title"
+                                   title="Title"
+                                   data-role="validate"
+                                   data-content="Title is required."
+                                   id="title" name="title"
+                                   type="text" class="no-spin form-control" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="author" class="col-sm-2 control-label">Author</label>
+                        <div class="col-sm-10">
+                            <input data-bind="value: model.author"
+                                   title="Author"
+                                   data-role="validate"
+                                   data-content="Author is required."
+                                   id="author" name="author"
+                                   type="text" class="no-spin form-control" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="publisher" class="col-sm-2 control-label">Publisher</label>
+                        <div class="col-sm-10">
+                            <input data-bind="value: model.publisher"
+                                   title="Publisher"
+                                   data-role="validate"
+                                   data-content="Publisher is required."
+                                   id="publisher" name="publisher"
+                                   type="text" class="no-spin form-control" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="isbn" class="col-sm-2 control-label">ISBN</label>
+                        <div class="col-sm-10">
+                            <input data-bind="value: model.isbn"
+                                   title="ISBN"
+                                   data-role="validate"
+                                   data-content="ISBN is required."
+                                   id="isbn" name="isbn"
+                                   type="text" class="no-spin form-control" required />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="price" class="col-sm-2 control-label">Price</label>
+                        <div class="col-sm-10">
+                            <input data-bind="value: model.price"
+                                   title="Price"
+                                   data-role="validate"
+                                   data-content="Price is required."
+                                   id="price" name="price"
+                                   type="number" class="no-spin form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pages" class="col-sm-2 control-label">Pages</label>
+                        <div class="col-sm-10">
+                            <input data-bind="value: model.pages"
+                                   title="Pages"
+                                   data-role="validate"
+                                   data-content="Pages is required."
+                                   id="pages" name="pages"
+                                   type="number" class="no-spin form-control" />
+                        </div>
+                    </div>
+
+                    <hr />
+
+                    <div class="form-group">
+                        
+                            <label for="description">Description</label>
+                            <textarea data-bind="value: model.description"
+                                      id="description" name="description"
+                                      required
+                                      title="Description"
+                                      data-role="validate"
+                                      data-content="A description is required."
+                                      class="form-control">
+                            </textarea>
+                       
+                    </div>
+
+
+                    @if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("User")) //CanEdit
+            {
+                        <div class="row">
+                            <div class="span11">
+                                <div id="progress-bar"
+                                     class="progress progress-striped active fade-anim none">
+                                    <div class="bar" style="width: 100%;"></div>
+                                </div>
+                                <div id="command-buttons" class="pull-right">
+                                    @if (!Model.IsNew)
+                                    {
+                                        <a href="#" id="delete-link" class="cmd"
+                                           data-bind="click: requestDelConfirm"
+                                           tabindex="-1">Delete</a>
+                                    }
+                                    <button data-bind="click: save" type="button"
+                                            class="btn btn-primary btn-large push-right cmd">
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    <!-- Message Containers  -->
+                    <div class="row">
+                        <div id="success-msg-container"
+                             class="span11 alert alert-success alert-block push-down">
+                            <button type="button"
+                                    class="close" data-dismiss="alert">
+                                ×
+                            </button>
+                            <h4>Changes Saved</h4>
+                            <p>
+                                The book information is saved.
+                                You can @Html.ActionLink("add another book", "new", "books") or
+                                @Html.ActionLink("return to the books list", "index", "books") if you wish.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div id="fail-msg-container"
+                             class="span11 alert alert-error alert-block push-down">
+                            <button type="button" class="close"
+                                    data-dismiss="alert">
+                                ×
+                            </button>
+                            <h4>Error</h4>
+                            <p>
+                                Oops, something bad happened!
+                                This is what the server has to say about it:
+                            </p>
+                            <p data-bind="text: errorMessage"></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div id="delete-msg-container"
+                             class="span11 alert alert-block push-down">
+                            <button type="button"
+                                    class="close" data-dismiss="alert">
+                                ×
+                            </button>
+                            <h4>Book Deleted</h4>
+                            <p>The book is now removed from the system.</p>
+                            <p>
+                                You can return to the
+                                @Html.ActionLink("full books list", "Index", "Books")
+                                or @Html.ActionLink("add a new book", "new", "Books").
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- /Message Containers  -->
+
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<div id="del-confirm" class="modal hide fade" tabindex="-1" role="dialog"
+     aria-labelledby="del-confirm-label" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close"
+                data-dismiss="modal" aria-hidden="true">
+            ×
+        </button>
+        <h3 id="del-confirm-label">Confirm Delete</h3>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure you want to delete this book?</p>
+        <p class="alert alert-error push-down">
+            <strong>Note:</strong>
+            There is no undo for this action.
+        </p>
+    </div>
+    <div class="modal-footer">
+        <button class="btn"
+                data-dismiss="modal" aria-hidden="true">
+            Close
+        </button>
+
+        <button class="btn btn-primary"
+                data-bind="click: del">
+            Delete Book
+        </button>
+    </div>
+</div>
