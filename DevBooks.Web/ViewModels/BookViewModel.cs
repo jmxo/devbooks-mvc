@@ -15,7 +15,7 @@ namespace DevBooks.Web.ViewModels
         {
             get { return DevBooks.Web.Config.ImagesUrlPrefix; }
         }
-
+            
         public BookViewModel()
         {
             this.Book = new Book();
