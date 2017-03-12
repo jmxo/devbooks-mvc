@@ -23,14 +23,20 @@ namespace DevBooks.Models
         [Required]
         [MaxLength(14)]
         public string Isbn { get; set; }
+
+        [Required]
         public decimal? Price { get; set; }
+
+        [Required]
         public int? Pages { get; set; }
 
         [MaxLength(500)]
         public string  Description { get; set; }
 
+        [Required]
         [MaxLength(100)]
         public string Publisher { get; set; }
+
         public string ImageName { get; set; }
 
         
