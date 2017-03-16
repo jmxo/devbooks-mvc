@@ -349,7 +349,7 @@
                                     </div>
                                 </div>
                                 <div id="command-buttons" class="pull-right">
-                                    @if (!Model.IsNew)
+                                    @if ((User.IsInRole("Admin") || User.IsInRole("Manager")) && !Model.IsNew) //CanDelete
                                     {
                                         <a href="#" id="delete-link" class="cmd"
                                            data-bind="click: requestDelConfirm"
