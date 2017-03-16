@@ -15,6 +15,7 @@ namespace DevBooks.Web
                 "~/Scripts/underscore.js",
                 "~/Scripts/app/_mixins.js",
                 "~/Scripts/respond.js",
+                "~/Scripts/h5F.js",
                 "~/Scripts/app/booksDataService.js",
                 "~/Scripts/app/validationUtility.js"
                 ));

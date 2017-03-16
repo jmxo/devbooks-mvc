@@ -214,6 +214,7 @@
     <Content Include="img\books\aspnet-core-ng2.jpg" />
     <Content Include="img\books\eloquent-javascript.jpg" />
     <Content Include="img\books\modern-web-development.jpg" />
+    <Content Include="img\books\no-img-large.png" />
     <Content Include="Scripts\app\booksDataService.js" />
     <Content Include="Scripts\app\validationUtility.js" />
     <Content Include="Scripts\app\_mixins.js" />

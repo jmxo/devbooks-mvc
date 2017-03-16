@@ -28,3 +28,13 @@ textarea {
 .deferred, .none {
     display:none;
 }
+
+/* yellow backhround for invalid required inputs*/
+textarea:invalid, input:invalid {
+    border:2px solid #ccc;
+}
+
+textarea.required, input.required
+{
+    background-color:#ffc;
+}

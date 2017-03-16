@@ -5,8 +5,6 @@
     DEL: 'DELETE'
 };
 
-//this is a self executing module, once the javascript doc is loaded to the page,
-//it will be available through booksDataService
 var booksDataService = (function () {
 
     var
@@ -43,14 +41,25 @@ var booksDataService = (function () {
 
                 return this.commit(type, url, data);
             },
+
+            saveImage: function (data) {
+                return $.ajax({
+                    type: httpVerbs.POST,
+                    url: '/books/uploadimage',
+                    processData: false,
+                    contentType: false,
+                    data: data
+                });
+            },
             
         };
 
-    _.bindAll(ds, 'del', 'save'); //underscore.js: means that the del and save functions run under the ds object, this helps with the context of "this" inside the functions
+    _.bindAll(ds, 'del', 'save'); //make del and save functions run under the ds object, this helps with the context of "this" inside the functions
 
     return {
         save: ds.save,
         del: ds.del,
+        saveImage: ds.saveImage
     }
 
 })();
